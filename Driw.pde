@@ -2,7 +2,7 @@
 //  отрисовка графиков
 
 void driwRect() {
-  textSize(50 / setGraf);
+  textSize(30 / setGraf * 1.7);
   for (int i = 0; i < setGraf; ++i) {
     stroke(0);
     rect(0, (h / setGraf * i), w, (h / setGraf * (i + 1)));
@@ -26,7 +26,6 @@ void driwRect() {
       line(w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1), w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1) - 5);
     }
   }
-
   fill(255);
 }
 
@@ -59,19 +58,31 @@ void driwData() {
   dataTimeOld = 0;
   dataDataOld = 0;
 
-  float[] razm = new float[setLine];
-  razm[0] = dataMin;
-  razm[setLine - 1] = dataMax;
-  for (int s = 1; s < setLine; ++s) {
-    razm[s] = raznicaData / setLine * s + dataMin;
-    print(razm[s] + "-");
+  String[] razm = new String[setLine];
+  String dt = "";
+  dt += dataMin;
+  razm[1] = dt.substring(0, dt.indexOf('.') + 2);
+  dt = "";
+  dt += dataMax;
+  razm[setLine - 1] = dt.substring(0, dt.indexOf('.') + 2);
+  dt = "";
+  for (int s = 2; s < setLine - 1; ++s) {
+    dt += raznicaData / (setLine - 2) * (s - 1) + dataMin;
+    razm[s] = dt.substring(0, dt.indexOf('.') + 2);
+    dt = "";
+  }
+  
+  println(dataMin + "; " + dataMax);
+  for (int a = 0; a < setLine; ++a){
+    print(razm[a] + "-");
   }
   println();
 
   for (int l = 0; l < setGraf; ++l) {
-    for (int k = 0; k < setLine; ++k) {
+    for (int k = 0; k < setLine - 1; ++k) {
       fill(0);
-      text(razm[setLine - k - 1], 1800, h / setGraf / setLine * k);
+      text(razm[setLine - k - 1], 3, (h / setGraf / setLine * (k + 1)) + (h / setGraf * l) - 3);
+      text(razm[setLine - k - 1], w - (6 - setGraf) * 40, (h / setGraf / setLine * (k + 1)) + (h / setGraf * l) - 3);
     }
   }
   fill(255);
