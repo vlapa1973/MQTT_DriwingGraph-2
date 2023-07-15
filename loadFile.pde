@@ -38,10 +38,10 @@ void loadFile() {
 
       if (a > h / setGraf || b > h / setGraf) {
         a = h / setGraf;
-        b = h / setGraf;
+        b = a;
       }
 
-      line((dataTimeOld / shiftTime + shift), a, (dataTime[i] / shiftTime + shift), b);
+      //line((dataTimeOld / shiftTime + shift), a, (dataTime[i] / shiftTime + shift), b);
     }
     rowCount = lines.length;
   }

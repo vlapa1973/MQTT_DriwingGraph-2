@@ -2,28 +2,35 @@
 //  отрисовка графиков
 
 void driwRect() {
-  textSize(30 / setGraf * 1.7);
+  textSize(24 / setGraf * 1.8);
   for (int i = 0; i < setGraf; ++i) {
     stroke(0);
-    rect(0, (h / setGraf * i), w, (h / setGraf * (i + 1)));
+    strokeWeight(3);
+    rect(0 + 3, h / setGraf * i + 3, w - 6, h / setGraf * (i + 1) - 6);
+    println(3 + ", " + (h / setGraf * i + 3) + ", " + (w - 6) + ", " + (h / setGraf * (i + 1) - 6));
+    println("*************");
   }
+  exit();
 
   for (int k = 0; k < setGraf; ++k) {
     for (int j = 1; j < setLine; ++j) {
       stroke(200);
+      strokeWeight(1);
       line(0, h / setGraf / setLine * j + h / setGraf * k, w, h / setGraf / setLine * j + h / setGraf * k);
       fill(0);
     }
     for (int j = 0; j < 24; ++j) {
       fill(0);
       stroke(200);
+      strokeWeight(1);
       line(1 + w / 24 * j, h / setGraf * (k + 1), 1 + w / 24 * j, h / setGraf * (k + 1) - h / setGraf);
       line(1 + w / 24 * j + w / 24 / 2, h / setGraf * (k + 1), 1 + w / 24 * j + w / 24 / 2, h / setGraf * (k + 1) - h / setGraf);
 
       stroke(0);
-      line(1 + w / 24 * j, h / setGraf * (k + 1), 1 + w / 24 * j, h / setGraf * (k + 1) - 15);
-      text(j, 6 + w / 24 * j, h / setGraf * (k + 1) - 4);
-      line(w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1), w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1) - 5);
+      strokeWeight(5);
+      line(1 + w / 24 * j, h / setGraf * (k + 1), 1 + w / 24 * j, h / setGraf * (k + 1) - 20);
+      line(w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1), w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1) - 10);
+      text(j, 6 + w / 24 * j, h / setGraf * (k + 1) - 20);
     }
   }
   fill(255);
@@ -60,21 +67,24 @@ void driwData() {
 
   String[] razm = new String[setLine];
   String dt = "";
-  dt += dataMin;
+
+  dt += int(dataMin * 10) / 10.0;
+  razm[0] = "0";
   razm[1] = dt.substring(0, dt.indexOf('.') + 2);
   dt = "";
-  dt += dataMax;
+  dt += round(dataMax * 10) / 10.0;
   razm[setLine - 1] = dt.substring(0, dt.indexOf('.') + 2);
+
   dt = "";
   for (int s = 2; s < setLine - 1; ++s) {
     dt += raznicaData / (setLine - 2) * (s - 1) + dataMin;
     razm[s] = dt.substring(0, dt.indexOf('.') + 2);
     dt = "";
   }
-  
+
   println(dataMin + "; " + dataMax);
-  for (int a = 0; a < setLine; ++a){
-    print(razm[a] + "-");
+  for (int a = 0; a < setLine; ++a) {
+    print(razm[a] + "  ");
   }
   println();
 

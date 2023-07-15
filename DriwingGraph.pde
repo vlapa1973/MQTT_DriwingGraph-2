@@ -40,13 +40,13 @@ int shift = 0;
 float shiftTime = w / 41.77;
 
 int setGraf = 5;
-int setLine = 10;
+int setLine = 5;
 
 /***********************************************************/
 //  настройки
 
 void settings() {
-  size(w, h);
+  size(w, h + 200);
   smooth(8);
 }
 
