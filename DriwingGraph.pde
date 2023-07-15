@@ -36,17 +36,17 @@ float koeff = 0;
 float raznicaData = 0;
 float a = 0;
 float b = 0;
-int shift = 0;
+//int shift = 0;
 float shiftTime = w / 41.77;
 
-int setGraf = 5;
-int setLine = 5;
+int setGraf = 3;
+int setLine = 10;
 
 /***********************************************************/
 //  настройки
 
 void settings() {
-  size(w, h + 200);
+  size(w, h + 1);
   smooth(8);
 }
 

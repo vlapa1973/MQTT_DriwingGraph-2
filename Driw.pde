@@ -5,12 +5,12 @@ void driwRect() {
   textSize(24 / setGraf * 1.8);
   for (int i = 0; i < setGraf; ++i) {
     stroke(0);
-    strokeWeight(3);
-    rect(0 + 3, h / setGraf * i + 3, w - 6, h / setGraf * (i + 1) - 6);
-    println(3 + ", " + (h / setGraf * i + 3) + ", " + (w - 6) + ", " + (h / setGraf * (i + 1) - 6));
-    println("*************");
+    strokeWeight(1);
+    rect(0, h / setGraf * i, w, h / setGraf);
+    //println(3 + ", " + (h / setGraf * i + 3) + ", " + (w - 6) + ", " + (h / setGraf * (i + 1) - 6));
+    //println("*************");
   }
-  exit();
+  //exit();
 
   for (int k = 0; k < setGraf; ++k) {
     for (int j = 1; j < setLine; ++j) {
@@ -48,22 +48,7 @@ void driwData() {
   stroke(255, 0, 0);
   strokeWeight(1);
 
-  for (int i = 0; i < dataData.length; ++i) {
-    a = h / setGraf - (dataDataOld - dataMin + raznicaData / setLine) * koeff;
-    b = h / setGraf - (dataData[i] - dataMin + raznicaData / setLine) * koeff;
-
-    if (a > h / setGraf || b > h / setGraf) {
-      a = h / setGraf;
-      b = h / setGraf;
-    }
-
-    line((dataTimeOld / shiftTime + shift), a, (dataTime[i] / shiftTime + shift), b);
-
-    dataTimeOld = dataTime[i];
-    dataDataOld = dataData[i];
-  }
-  dataTimeOld = 0;
-  dataDataOld = 0;
+  
 
   String[] razm = new String[setLine];
   String dt = "";
@@ -81,6 +66,23 @@ void driwData() {
     razm[s] = dt.substring(0, dt.indexOf('.') + 2);
     dt = "";
   }
+  
+  for (int i = 0; i < dataData.length; ++i) {
+    a = h / setGraf - (dataDataOld - dataMin + raznicaData / setLine) * koeff;
+    b = h / setGraf - (dataData[i] - dataMin + raznicaData / setLine) * koeff;
+
+    if (a > h / setGraf || b > h / setGraf) {
+      a = h / setGraf;
+      b = a;
+    }
+
+    line(dataTimeOld / shiftTime, a, dataTime[i] / shiftTime, b);
+
+    dataTimeOld = dataTime[i];
+    dataDataOld = dataData[i];
+  }
+  dataTimeOld = 0;
+  dataDataOld = 0;
 
   println(dataMin + "; " + dataMax);
   for (int a = 0; a < setLine; ++a) {
