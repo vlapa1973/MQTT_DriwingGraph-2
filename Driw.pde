@@ -27,10 +27,10 @@ void driwRect() {
       line(1 + w / 24 * j + w / 24 / 2, h / setGraf * (k + 1), 1 + w / 24 * j + w / 24 / 2, h / setGraf * (k + 1) - h / setGraf);
 
       stroke(0);
-      strokeWeight(5);
+      strokeWeight(3);
       line(1 + w / 24 * j, h / setGraf * (k + 1), 1 + w / 24 * j, h / setGraf * (k + 1) - 20);
       line(w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1), w / 24 / 2 + 1 + w / 24 * j, h / setGraf * (k + 1) - 10);
-      text(j, 6 + w / 24 * j, h / setGraf * (k + 1) - 20);
+      text(j, 6 + w / 24 * j, h / setGraf * (k + 1) - 10);
     }
   }
   fill(255);
@@ -40,15 +40,12 @@ void driwRect() {
 //  первичная отрисовка данных
 
 void driwData() {
-  raznicaData = dataMax - dataMin;
-  koeff = h / setGraf / (raznicaData / setLine * 2 + raznicaData);
-
   driwRect();
 
   stroke(255, 0, 0);
   strokeWeight(1);
 
-  
+
 
   String[] razm = new String[setLine];
   String dt = "";
@@ -66,10 +63,16 @@ void driwData() {
     razm[s] = dt.substring(0, dt.indexOf('.') + 2);
     dt = "";
   }
-  
+
+  raznicaData = float(razm[setLine - 1]) - float(razm[1]);
+  koeff = h / setGraf / (raznicaData / setLine * 2 + raznicaData);
+
   for (int i = 0; i < dataData.length; ++i) {
-    a = h / setGraf - (dataDataOld - dataMin + raznicaData / setLine) * koeff;
-    b = h / setGraf - (dataData[i] - dataMin + raznicaData / setLine) * koeff;
+    //a = h / setGraf - (dataDataOld - dataMin + raznicaData / setLine) * koeff;
+    //b = h / setGraf - (dataData[i] - dataMin + raznicaData / setLine) * koeff;
+
+    a = h / setGraf - h / setGraf / setLine - (dataDataOld - float(razm[1])) * koeff;
+    b = h / setGraf - (dataData[i] - float(razm[1])) * koeff;
 
     if (a > h / setGraf || b > h / setGraf) {
       a = h / setGraf;
@@ -94,7 +97,8 @@ void driwData() {
     for (int k = 0; k < setLine - 1; ++k) {
       fill(0);
       text(razm[setLine - k - 1], 3, (h / setGraf / setLine * (k + 1)) + (h / setGraf * l) - 3);
-      text(razm[setLine - k - 1], w - (6 - setGraf) * 40, (h / setGraf / setLine * (k + 1)) + (h / setGraf * l) - 3);
+      text(razm[setLine - k - 1], w - (6 - setGraf) * 40,
+        (h / setGraf / setLine * (k + 1)) + (h / setGraf * l) - 3);
     }
   }
   fill(255);
