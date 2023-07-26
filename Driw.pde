@@ -51,7 +51,7 @@ void driwData() {
   String dt = "";
 
   dt += int(dataMin * 10) / 10.0;
-  razm[0] = "0";
+  razm[0] = dt;
   razm[1] = dt.substring(0, dt.indexOf('.') + 2);
   dt = "";
   dt += round(dataMax * 10) / 10.0;
@@ -65,14 +65,17 @@ void driwData() {
   }
 
   raznicaData = float(razm[setLine - 1]) - float(razm[1]);
-  koeff = h / setGraf / (raznicaData / setLine * 2 + raznicaData);
+  //print("raznicaData = " + raznicaData);
+  //koeff = h / setGraf / (raznicaData / setLine * 2 + raznicaData);
+  //println(";  koeff = " + koeff);
+  
+  koeff = h / setGraf / (dataMax - dataMin);
 
   for (int i = 0; i < dataData.length; ++i) {
-    //a = h / setGraf - (dataDataOld - dataMin + raznicaData / setLine) * koeff;
-    //b = h / setGraf - (dataData[i] - dataMin + raznicaData / setLine) * koeff;
+    
+    a = h / setGraf - (dataDataOld - dataMin) * koeff;
+    b = h / setGraf - (dataData[i] - dataMin) * koeff;
 
-    a = h / setGraf - h / setGraf / setLine - (dataDataOld - float(razm[1])) * koeff;
-    b = h / setGraf - (dataData[i] - float(razm[1])) * koeff;
 
     if (a > h / setGraf || b > h / setGraf) {
       a = h / setGraf;
@@ -91,7 +94,7 @@ void driwData() {
   for (int a = 0; a < setLine; ++a) {
     print(razm[a] + "  ");
   }
-  println();
+  println("\n------------");
 
   for (int l = 0; l < setGraf; ++l) {
     for (int k = 0; k < setLine - 1; ++k) {

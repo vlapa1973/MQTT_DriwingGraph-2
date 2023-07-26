@@ -39,7 +39,7 @@ float b = 0;
 //int shift = 0;
 float shiftTime = w / 41.77;
 
-int setGraf = 3;
+int setGraf = 2;
 int setLine = 10;
 
 /***********************************************************/
