@@ -1,4 +1,29 @@
 /***********************************************************/
+//  выбор папки
+//String folderPath;
+
+void folderSelected(File selection) {
+  if (selection == null) {
+    println("**************************");
+  } else {
+    //folderPath = selection.getAbsolutePath();
+    //String a = selection.listFiles(-txt);
+    //println(folderPath);
+    //File[] files = listFiles(folderPath);
+    //println("-------------");
+    //printArray(files);
+    println("-------------");
+
+    File folder = new File(selection.getAbsolutePath());
+
+    for (File file : folder.listFiles()) {
+      println(file.getName());
+    }
+    println("-------------");
+  }
+}
+
+/***********************************************************/
 //  выбор файла
 void fileSelected(File selection) {
   if (selection == null) {
@@ -15,7 +40,7 @@ void fileSelected(File selection) {
 
 void loadFile() {
 
-  lines = loadStrings(filePath);
+  String[] lines = loadStrings(filePath);
   if (rowCount == lines.length) {
     return;
   } else {

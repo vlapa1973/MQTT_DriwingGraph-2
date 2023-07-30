@@ -13,7 +13,6 @@ String filePath;
 boolean flagWork = false;
 int millisOld = 0;
 int rowCount = 0;
-String[] lines;
 int chas = 0;
 int min = 0;
 int sec =0;
@@ -58,11 +57,8 @@ void setup() {
   surface.setResizable(true);
   textFont(createFont("Arial", 12, true));
 
-  //driwRect();
-  //loadFile();
-  //driwData();
-
-  selectInput("Select a file to process:", "fileSelected");
+  selectFolder("Select a folder to process:", "folderSelected");
+  //selectInput("Select a file to process:", "fileSelected");
 }
 
 /***********************************************************/
